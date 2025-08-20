@@ -1,0 +1,18 @@
+{
+  "frontendFolder": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/src/main/frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/src/main/frontend/generated/jar-resources",
+  "staticOutput": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "C:\\Users\\AK\\Desktop\\CONCORDIA\\Projects\\deploy\\Calculator Web App\\target\\classes\\META-INF\\VAADIN\\config",
+  "frontendBundleOutput": "C:\\Users\\AK\\Desktop\\CONCORDIA\\Projects\\deploy\\Calculator Web App\\target\\classes\\META-INF\\VAADIN\\webapp",
+  "devBundleOutput": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/target/dev-bundle/webapp",
+  "devBundleStatsOutput": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/target/dev-bundle/config",
+  "i18nOutput": "target/classes/vaadin-i18n",
+  "jarResourcesFolder": "C:/Users/AK/Desktop/CONCORDIA/Projects/deploy/Calculator Web App/src/main/frontend/generated/jar-resources",
+  "themeName": "",
+  "clientServiceWorkerSource": "C:\\Users\\AK\\Desktop\\CONCORDIA\\Projects\\deploy\\Calculator Web App\\target\\sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}
