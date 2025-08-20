@@ -31,6 +31,9 @@ public class CalculatorDriver {
     private Input outputDisplay;
     private TextArea history;
     private String historyText = "";
+		public void clearHistory() {
+			historyText = "";
+		}
 
 	public CalculatorDriver() {
 
@@ -95,18 +98,23 @@ public class CalculatorDriver {
 				input = tempInput;
 				operatorEntry(button);
 				equation = output;
-				historyText += equation;
+				
 				getResult(output);
-                if (!isSyntaxError) appendHistory();	
+                if (!isSyntaxError) { 
+					historyText += equation;
+					appendHistory();
+				}
+
                 isSyntaxError = false;	
             }
 			else {
 				operatorEntry(button);
 				equation = output;
-				historyText += equation;
 				getResult(output);
-				historyText += output;
-                if (!isSyntaxError) appendHistory();
+                if (!isSyntaxError) { 
+					historyText += equation;
+					appendHistory();
+				}
                 isSyntaxError = false;
 			}
 		}

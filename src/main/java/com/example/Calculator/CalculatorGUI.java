@@ -1,5 +1,6 @@
 package com.example.Calculator;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -129,9 +130,17 @@ public class CalculatorGUI {
             historyField.scrollToEnd();
         });
         
-
+        HorizontalLayout headerLayout = new HorizontalLayout();
         H2 historyHeader = new H2("History");
-        historyLayout.add(historyHeader, historyField);
+        Button clearHistory = new Button("Clear");
+        clearHistory.addClickListener(event -> {
+            historyField.clear();
+            driver.clearHistory();
+        });
+
+        headerLayout.add(historyHeader, clearHistory);
+
+        historyLayout.add(headerLayout, historyField);
         layout.add(historyLayout);
 
         driver.initializeHistoryField(historyField);
