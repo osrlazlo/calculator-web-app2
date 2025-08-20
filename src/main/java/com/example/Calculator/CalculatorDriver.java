@@ -271,8 +271,10 @@ public class CalculatorDriver {
 	
  	private static double getResult(String entry) {
 
-		System.out.println("equation: "+entry); 
-        System.out.println("getResult: "+entry); 
+		Equation eqObj = new Equation(entry);
+
+		System.out.println("equation: "+eqObj); 
+        System.out.println("getResult: "+eqObj); 
         
 		//operatorEntry("=");
 		//System.out.println(entry = output); 
@@ -282,8 +284,8 @@ public class CalculatorDriver {
 		}*/
 		
 		//check syntax
-			if (isSyntaxValid(entry) == false) { 
-				System.out.println(entry); 
+			if (isSyntaxValid(eqObj.getString()) == false) { 
+				System.out.println(eqObj); 
 				System.out.println("error:syntax"); 
 				outputDisplay.setValue("error:syntax");
 				input = "0";
@@ -292,17 +294,18 @@ public class CalculatorDriver {
 				return 0; 
 				}
 		
-		while (entry.contains("(")) entry = removeParenthesis(entry);
-			System.out.println("entryNoParenthesis?: "+entry);
+		while (eqObj.getString().contains("(")) eqObj.setString(removeParenthesis(eqObj.getString()));
+			System.out.println("entryNoParenthesis?: "+eqObj);
 			
-		String[] numbers_operators = entry.trim().splitWithDelimiters(" [-x÷\\+] |(\\^)|/| =", 0);
+		ArrayList<String> numbers_operators = new ArrayList<>();
+		numbers_operators = eqObj.trim().splitWithDelimiters("[-x÷\\+]|(\\^)|/|=", numbers_operators);
 		ArrayList<String> operators = new ArrayList<>();
 		ArrayList<String> numbers = new ArrayList<>();
 		
-		for (int i=0; i<numbers_operators.length; i++) {
-			if (numbers_operators[i].matches("^(\s)?[-x÷\\+](\s)?$|(\\^)|/"))
-				operators.add(numbers_operators[i].trim());
-			else if (numbers_operators[i].matches("^(-)?[0-9]+(.[0-9]+)?(E[0-9]+)?$"))numbers.add(numbers_operators[i].trim());
+		for (int i=0; i<numbers_operators.size(); i++) {
+			if (numbers_operators.get(i).matches("^(\s)?[-x÷\\+](\s)?$|(\\^)|/"))
+				operators.add(numbers_operators.get(i).trim());
+			else if (numbers_operators.get(i).matches("^(-)?[0-9]+(.[0-9]+)?(E[0-9]+)?$"))numbers.add(numbers_operators.get(i).trim());
 		}
 		
 		System.out.println("numbers: " + numbers);
@@ -322,9 +325,12 @@ public class CalculatorDriver {
 
  	private static String removeParenthesis(String entry) {
 
- 		System.out.println("removeParenthesisOf: "+entry);
+		Equation eqObj = new Equation(entry);
+ 		System.out.println("removeParenthesisOf: "+eqObj);
  		
- 		String[] num_op = entry.splitWithDelimiters("[\\(\\)]", 0);
+ 		ArrayList<String> num_op = new ArrayList<>();
+		num_op = eqObj.splitWithDelimiters("[\\(\\)=]", num_op);
+
 	 		System.out.print("num_op_split: [");
 	 		for (String element : num_op) {
 	 			System.out.print(element+",");
