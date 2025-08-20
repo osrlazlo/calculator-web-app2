@@ -14,7 +14,7 @@ public class CalculatorButton extends Button {
         public CalculatorButton(String label) {
             super(label);
             this.label = label;
-            this.addClickListener(_ -> {
+            this.addClickListener(event -> {
                 CalculatorDriver.buttonPress(label);
             });
             this.addClassName("button");
@@ -23,7 +23,7 @@ public class CalculatorButton extends Button {
         public CalculatorButton(String label, String value) {
             super(label);
             this.label = value;
-            this.addClickListener(_ -> {
+            this.addClickListener(event -> {
                 CalculatorDriver.buttonPress(this.label);
             });
             this.addClassName("button");

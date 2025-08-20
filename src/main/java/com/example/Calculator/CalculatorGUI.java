@@ -27,7 +27,7 @@ public class CalculatorGUI {
         outputDisplay.setReadOnly(true);
         outputDisplay.addClassName("display");
         outputDisplay.setId("output-display");
-        outputDisplay.addValueChangeListener(_ -> {
+        outputDisplay.addValueChangeListener(event -> {
            // UI.getCurrent().getPage().executeJs("$0.scrollLeft = $0.scrollWidth", null)
         });
 
@@ -124,7 +124,7 @@ public class CalculatorGUI {
         historyField.addClassName("history_field");
         historyField.setReadOnly(true);
         historyField.setId("history-fiedl");
-        historyField.addValueChangeListener(_ -> {
+        historyField.addValueChangeListener(event -> {
             historyField.scrollToEnd();
         });
         
