@@ -9,17 +9,16 @@ import com.vaadin.flow.component.textfield.TextArea;
 @SuppressWarnings("serial")
 public class CalculatorDriver {
 	
-	private static String input = "0"; private static String lastInput; private static String lastOperator;
-	private static String output = "";
-	private static String equation ="";
-	private static String result; 
-    public static String lastResult;
-	private static boolean isLastPressEqual = false;
-    private static boolean isSyntaxError = false;
-    //private static int isFinalOp = 0;
-	public static int numberOfInputs = 0; //numbers entered in operation
-	private static boolean outputDelete = false; //when editing entry
-	final static String validNum = "((\\()?)+(-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?((\\))?)+"
+	private String input = "0"; private String lastInput; private String lastOperator;
+	private String output = "";
+	private String equation ="";
+	private String result; 
+	private boolean isLastPressEqual = false;
+    private boolean isSyntaxError = false;
+    //private int isFinalOp = 0;
+	public int numberOfInputs = 0; //numbers entered in operation
+	private boolean outputDelete = false; //when editing entry
+	private final String validNum = "((\\()?)+(-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?((\\))?)+"
 			+ "((\\((-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?)?)+(((\s)?[xX\\-÷\\+\\^/](\s)?"
 			+ "((\\()?)+(-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?)?)+((\\))?)+"
 			+ "((\\((-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?)?)+(((\s)?[xX\\-÷\\+\\^/](\s)?"
@@ -28,45 +27,49 @@ public class CalculatorDriver {
 			+ "((\\()?)+(-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?)?)+(([\\)\\()])?)+)?)+"
 			+ "|\\)";
 
-    public static Input inputDisplay;
-    public static Input outputDisplay;
-    public static TextArea history;
-    private static String historyText = "";
+    private Input inputDisplay;
+    private Input outputDisplay;
+    private TextArea history;
+    private String historyText = "";
 
-    public static void initializeDriver(Input input, Input output) {
+	public CalculatorDriver() {
+
+	}
+
+    public void initializeDriver(Input input, Input output) {
         inputDisplay = input;
         outputDisplay = output;
     }
 
-    public static void initializeHistoryField(TextArea historyfield) {
+    public void initializeHistoryField(TextArea historyfield) {
         history = historyfield;
     }
 
-    private static void appendHistory() {
+    private void appendHistory() {
         historyText += "\n"+result+"\n\n";
 		//System.out.println("history:"+historyText);
         history.setValue(historyText);
     }
 	
 	//Operations
-		private static double mult(double num1, double num2) {
+		private double mult(double num1, double num2) {
 			return num1 * num2;
 		}
-		private static double div(double num1, double num2) {
+		private double div(double num1, double num2) {
 			return num1 / num2;
 		}
-		private static double add(double num1, double num2) {
+		private double add(double num1, double num2) {
 			return num1 + num2;
 		}
-		private static double sub(double num1, double num2) {
+		private double sub(double num1, double num2) {
 			return num1 - num2;
 		}
-		private static double exponent(double num1, double num2) {
+		private double exponent(double num1, double num2) {
 		return Math.pow(num1, num2);
 	}
 	
 	//user input in the calculator
-	public static void buttonPress(String button) {
+	public void buttonPress(String button) {
 		//System.out.println("button pressed " + button);
 	
 		if (button.matches("[0-9\\.]") || button.equals("\u03C0")) {
@@ -110,7 +113,7 @@ public class CalculatorDriver {
 		else otherOperatorEntry(button);			
 	}
 	
-	private static void numberEntry(String numEntered) {
+	private void numberEntry(String numEntered) {
 		
 		isLastPressEqual = false;
 		
@@ -162,7 +165,7 @@ public class CalculatorDriver {
 		
 	}
 
-	private static void operatorEntry(String operator) {
+	private void operatorEntry(String operator) {
 		
 		isLastPressEqual = false;
 		
@@ -189,7 +192,7 @@ public class CalculatorDriver {
 		outputDelete = false;
 	}
 	
-	private static void otherOperatorEntry(String operator) {
+	private void otherOperatorEntry(String operator) {
 		
 		isLastPressEqual = false;
 		
@@ -269,7 +272,7 @@ public class CalculatorDriver {
 		}
 	};
 	
- 	private static double getResult(String entry) {
+ 	private double getResult(String entry) {
 
 		Equation eqObj = new Equation(entry);
 
@@ -323,7 +326,7 @@ public class CalculatorDriver {
 		
 	}
 
- 	private static String removeParenthesis(String entry) {
+ 	private String removeParenthesis(String entry) {
 
 		Equation eqObj = new Equation(entry);
  		//System.out.println("removeParenthesisOf: "+eqObj);
@@ -383,7 +386,7 @@ public class CalculatorDriver {
  		return resultNoParenthesis;	
  	}
  	
-	private static double searchOperation(ArrayList<String> numbers , ArrayList<String> operators) {
+	private double searchOperation(ArrayList<String> numbers , ArrayList<String> operators) {
 		
 		String mult = "x";
 		String div = "÷";
@@ -402,7 +405,7 @@ public class CalculatorDriver {
 				if (operators.get(i).equals(frac)) {
 					index = i;
 					numbersToSend = getNumbers(index, numbers, operators);
-					result = ""+CalculatorDriver.div(numbersToSend[0], numbersToSend[1]);
+					result = ""+this.div(numbersToSend[0], numbersToSend[1]);
 					numbers.add(index, result);
 					continue;
 				}	
@@ -414,7 +417,7 @@ public class CalculatorDriver {
 						if (operators.get(i).equals(exp)) {
 							index = i;
 							numbersToSend = getNumbers(index, numbers, operators);
-							result = ""+CalculatorDriver.exponent(numbersToSend[0], numbersToSend[1]);
+							result = ""+this.exponent(numbersToSend[0], numbersToSend[1]);
 							numbers.add(index, result);
 							continue;
 						}
@@ -429,7 +432,7 @@ public class CalculatorDriver {
 						else {
 							index = i;
 							numbersToSend = getNumbers(index, numbers, operators);
-							result = ""+CalculatorDriver.mult(numbersToSend[0], numbersToSend[1]);
+							result = ""+this.mult(numbersToSend[0], numbersToSend[1]);
 							numbers.add(index, result);
 							continue;
 						} 
@@ -446,7 +449,7 @@ public class CalculatorDriver {
 						else {
 							index = i;
 							numbersToSend = getNumbers(index, numbers, operators);
-							result = ""+CalculatorDriver.div(numbersToSend[0], numbersToSend[1]);
+							result = ""+this.div(numbersToSend[0], numbersToSend[1]);
 							numbers.add(index, result);
 							continue;
 						}
@@ -462,7 +465,7 @@ public class CalculatorDriver {
 						else {
 							index = i;
 							numbersToSend = getNumbers(index, numbers, operators);
-							result = ""+CalculatorDriver.add(numbersToSend[0], numbersToSend[1]);
+							result = ""+this.add(numbersToSend[0], numbersToSend[1]);
 							numbers.add(index, result);
 							continue;
 						}
@@ -478,7 +481,7 @@ public class CalculatorDriver {
 						else {
 							index = i;
 							numbersToSend = getNumbers(index, numbers, operators);
-							result = ""+CalculatorDriver.sub(numbersToSend[0], numbersToSend[1]);
+							result = ""+this.sub(numbersToSend[0], numbersToSend[1]);
 							numbers.add(index, result);
 							continue;
 						}
@@ -487,12 +490,11 @@ public class CalculatorDriver {
 			}
 		}
 		if (index == -1) result = numbers.get(0);
-		lastResult = result;
 		inputDisplay.setValue(result);
 		return Double.parseDouble(result);
 	}
 	
-	private static double[] getNumbers(int index, ArrayList<String> numbers, ArrayList<String> operators ) {
+	private double[] getNumbers(int index, ArrayList<String> numbers, ArrayList<String> operators ) {
 		
 		double[] numbersToReturn = new double[2];
 		numbersToReturn[0] = Double.parseDouble(numbers.get(index));
@@ -505,7 +507,7 @@ public class CalculatorDriver {
 		return numbersToReturn;
 	}
 
-	private static boolean isSyntaxValid(String operation) {
+	private boolean isSyntaxValid(String operation) {
 		//String validSyntaxRegex = "[0-9]+(((\s)?[xX\\-÷\\+\\^/](\s)?[0-9]+)?)+\s[=]\s";
 		final String validSyntaxParenthesisRegex = 
 		  "((\\()?)+(-)?([0-9]|(\u03C0))+(.[0-9]+)?(E(-)?[0-9]+)?((\\))?)+"

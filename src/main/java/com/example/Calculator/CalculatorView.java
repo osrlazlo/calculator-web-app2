@@ -10,19 +10,24 @@ import com.vaadin.flow.component.dependency.CssImport;
 @Route("")
 @CssImport("./styles/styles.css")
 public class CalculatorView extends VerticalLayout {
+
+    private CalculatorGUI calcGUI;
+
     public CalculatorView() {
         this.addClassName("main_view");
         this.setSizeFull();
 
         VerticalLayout calculator = new VerticalLayout();
         calculator.setId("calculator");
+
+        calcGUI = new CalculatorGUI();
         
-        CalculatorGUI.addCalculator(calculator);
+        calcGUI.addCalculator(calculator);
 
         HorizontalLayout container = new HorizontalLayout();
         container.setWidth("100vh");
         container.add(calculator);
-        CalculatorGUI.addHistoryField(container);
+        calcGUI.addHistoryField(container);
 
         add(container);
     }

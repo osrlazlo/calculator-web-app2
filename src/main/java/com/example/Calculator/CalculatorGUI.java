@@ -12,17 +12,18 @@ import com.vaadin.flow.component.textfield.TextArea;
 
 public class CalculatorGUI {
 
-
+    private CalculatorDriver driver;
 
     public CalculatorGUI() {
     }
 
-    public static void addCalculator(VerticalLayout layout) {
+    public void addCalculator(VerticalLayout layout) {
 
         Input outputDisplay = new Input();
         Input inputDisplay = new Input();
+        driver = new CalculatorDriver();
 
-        CalculatorDriver.initializeDriver(inputDisplay, outputDisplay);
+        driver.initializeDriver(inputDisplay, outputDisplay);
 
         outputDisplay.setReadOnly(true);
         outputDisplay.addClassName("display");
@@ -36,45 +37,45 @@ public class CalculatorGUI {
         inputDisplay.setId("input_display");
         inputDisplay.setValue("0");
 
-        CalculatorButton buttonZero = new CalculatorButton("0");
-        CalculatorButton buttonOne = new CalculatorButton("1");
-        CalculatorButton buttonTwo = new CalculatorButton("2");
-        CalculatorButton buttonThree = new CalculatorButton("3");
-        CalculatorButton buttonFour = new CalculatorButton("4");
-        CalculatorButton buttonFive = new CalculatorButton("5");
-        CalculatorButton buttonSix = new CalculatorButton("6");
-        CalculatorButton buttonSeven = new CalculatorButton("7");
-        CalculatorButton buttonEight = new CalculatorButton("8");
-        CalculatorButton buttonNine = new CalculatorButton("9");
-        CalculatorButton buttonDot = new CalculatorButton(".");
-        CalculatorButton buttonSign = new CalculatorButton("+/-", "sign");
+        CalculatorButton buttonZero = new CalculatorButton(driver, "0");
+        CalculatorButton buttonOne = new CalculatorButton(driver, "1");
+        CalculatorButton buttonTwo = new CalculatorButton(driver, "2");
+        CalculatorButton buttonThree = new CalculatorButton(driver, "3");
+        CalculatorButton buttonFour = new CalculatorButton(driver, "4");
+        CalculatorButton buttonFive = new CalculatorButton(driver, "5");
+        CalculatorButton buttonSix = new CalculatorButton(driver, "6");
+        CalculatorButton buttonSeven = new CalculatorButton(driver, "7");
+        CalculatorButton buttonEight = new CalculatorButton(driver, "8");
+        CalculatorButton buttonNine = new CalculatorButton(driver, "9");
+        CalculatorButton buttonDot = new CalculatorButton(driver, ".");
+        CalculatorButton buttonSign = new CalculatorButton(driver, "+/-", "sign");
         
-        CalculatorButton buttonPlus = new CalculatorButton("+");
+        CalculatorButton buttonPlus = new CalculatorButton(driver, "+");
         buttonPlus.addClassName("operator_btn");
-        CalculatorButton buttonMinus = new CalculatorButton("-");
+        CalculatorButton buttonMinus = new CalculatorButton(driver, "-");
         buttonMinus.addClassName("operator_btn");
-        CalculatorButton buttonMultiply = new CalculatorButton("x");
+        CalculatorButton buttonMultiply = new CalculatorButton(driver, "x");
         buttonMultiply.addClassName("operator_btn");
-        CalculatorButton buttonDivide = new CalculatorButton("÷");
+        CalculatorButton buttonDivide = new CalculatorButton(driver, "÷");
         buttonDivide.addClassName("operator_btn");
-        CalculatorButton buttonEqual = new CalculatorButton("=");
+        CalculatorButton buttonEqual = new CalculatorButton(driver, "=");
         buttonEqual.addClassName("operator_btn");
         
-        CalculatorButton buttonC = new CalculatorButton("C");
+        CalculatorButton buttonC = new CalculatorButton(driver, "C");
         buttonC.addClassName("other_btn");
-        CalculatorButton buttonDEL = new CalculatorButton("DEL");
+        CalculatorButton buttonDEL = new CalculatorButton(driver, "DEL");
         buttonDEL.addClassName("other_btn");
-        CalculatorButton buttonExp = new CalculatorButton("x^y", "^");
+        CalculatorButton buttonExp = new CalculatorButton(driver, "x^y", "^");
         buttonExp.addClassName("other_btn");
         
-        CalculatorButton buttonBracketOpen = new CalculatorButton("(");
+        CalculatorButton buttonBracketOpen = new CalculatorButton(driver, "(");
         buttonBracketOpen.addClassName("other_btn");
-        CalculatorButton buttonBracketClose = new CalculatorButton(")");
+        CalculatorButton buttonBracketClose = new CalculatorButton(driver, ")");
         buttonBracketClose.addClassName("other_btn");
-        CalculatorButton buttonFrac = new CalculatorButton("x/y", "/");
+        CalculatorButton buttonFrac = new CalculatorButton(driver, "x/y", "/");
         buttonFrac.addClassName("other_btn");
-        //CalculatorButton buttonPi = new CalculatorButton("\u03C0");
-        CalculatorButton buttonPi = new CalculatorButton("");
+        //CalculatorButton buttonPi = new CalculatorButton(driver, "\u03C0");
+        CalculatorButton buttonPi = new CalculatorButton(driver, "");
         
         
 
@@ -115,7 +116,7 @@ public class CalculatorGUI {
         
     }
 
-    public static void addHistoryField(HorizontalLayout layout) {
+    public void addHistoryField(HorizontalLayout layout) {
         VerticalLayout historyLayout = new VerticalLayout();
         historyLayout.addClassName("history_layout");
 
@@ -133,7 +134,7 @@ public class CalculatorGUI {
         historyLayout.add(historyHeader, historyField);
         layout.add(historyLayout);
 
-        CalculatorDriver.initializeHistoryField(historyField);
+        driver.initializeHistoryField(historyField);
     }
 
     
