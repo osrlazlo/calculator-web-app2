@@ -16,7 +16,7 @@ public class CalculatorDriver {
     public static String lastResult;
 	private static boolean isLastPressEqual = false;
     private static boolean isSyntaxError = false;
-    private static int isFinalOp = 0;
+    //private static int isFinalOp = 0;
 	public static int numberOfInputs = 0; //numbers entered in operation
 	private static boolean outputDelete = false; //when editing entry
 	final static String validNum = "((\\()?)+(-)?[0-9]+(.[0-9]+)?(E(-)?[0-9]+)?((\\))?)+"
@@ -44,7 +44,7 @@ public class CalculatorDriver {
 
     private static void appendHistory() {
         historyText += "\n"+result+"\n\n";
-		System.out.println("history:"+historyText);
+		//System.out.println("history:"+historyText);
         history.setValue(historyText);
     }
 	
@@ -67,7 +67,7 @@ public class CalculatorDriver {
 	
 	//user input in the calculator
 	public static void buttonPress(String button) {
-		System.out.println("button pressed " + button);
+		//System.out.println("button pressed " + button);
 	
 		if (button.matches("[0-9\\.]") || button.equals("\u03C0")) {
 			numberEntry(button);
@@ -84,11 +84,11 @@ public class CalculatorDriver {
 		}
 		else if (button.equals("=")) {
 			if (isLastPressEqual) {
-				System.out.println("isLastPressEqual:"+isLastPressEqual);
+				//System.out.println("isLastPressEqual:"+isLastPressEqual);
 				String tempInput = lastInput;
 				input = result;
 				operatorEntry(lastOperator);
-				System.out.println("last operator: "+lastOperator);
+				//System.out.println("last operator: "+lastOperator);
 				input = tempInput;
 				operatorEntry(button);
 				equation = output;
@@ -177,7 +177,7 @@ public class CalculatorDriver {
 			numberOfInputs++;
 			lastInput = input;//store last input number
 			
-			System.out.println("last intput: " + lastInput);
+			//System.out.println("last intput: " + lastInput);
 			if (input.equals("0")) input = "";
 			input += (operator.matches("[/\\)\\(\\^]")) ? operator : " "+operator+" ";
 			output += input;
@@ -194,7 +194,7 @@ public class CalculatorDriver {
 		isLastPressEqual = false;
 		
 		//for sign, parenthesis, C, DEL [...]
-		System.out.println("otherOperatorEntry");
+		//System.out.println("otherOperatorEntry");
 		switch (operator) {
 		case "C" : //reset
 			output = "";
@@ -211,28 +211,28 @@ public class CalculatorDriver {
 						if (outputDelete==false) {
 							output = output.substring(0, output.length()-2).trim();
 							outputDisplay.setValue(output);
-							System.out.println("deleted entry in output");
+							//System.out.println("deleted entry in output");
 							outputDelete = true;
 						} 
 						else {
 							output = output.substring(0, output.length()-1).trim();
 							outputDisplay.setValue(output);
-							System.out.println("deleted entry in output");
+							//System.out.println("deleted entry in output");
 							outputDelete = true;
 						}
 					}
 					break;
 				}
 				catch (NullPointerException npe) {
-					System.out.println("excepption:nothing to delete");
+					//System.out.println("excepption:nothing to delete");
 				} 
 				catch (IndexOutOfBoundsException ioobe) {
-					System.out.println("excepption:cannot edit result");
+					//System.out.println("excepption:cannot edit result");
 				} break;
 			
 		case "sign":
 			outputDelete = false;
-            System.out.println("sign");
+            //System.out.println("sign");
 			if (!input.contains("-")) {
 				input = "-"+input;
 				inputDisplay.setValue(input);
@@ -273,8 +273,8 @@ public class CalculatorDriver {
 
 		Equation eqObj = new Equation(entry);
 
-		System.out.println("equation: "+eqObj); 
-        System.out.println("getResult: "+eqObj); 
+		//System.out.println("equation: "+eqObj); 
+        //System.out.println("getResult: "+eqObj); 
         
 		//operatorEntry("=");
 		//System.out.println(entry = output); 
@@ -285,8 +285,8 @@ public class CalculatorDriver {
 		
 		//check syntax
 			if (isSyntaxValid(eqObj.getString()) == false) { 
-				System.out.println(eqObj); 
-				System.out.println("error:syntax"); 
+				//System.out.println(eqObj); 
+				//System.out.println("error:syntax"); 
 				outputDisplay.setValue("error:syntax");
 				input = "0";
 				output = "";
@@ -295,7 +295,7 @@ public class CalculatorDriver {
 				}
 		
 		while (eqObj.getString().contains("(")) eqObj.setString(removeParenthesis(eqObj.getString()));
-			System.out.println("entryNoParenthesis?: "+eqObj);
+			//System.out.println("entryNoParenthesis?: "+eqObj);
 			
 		ArrayList<String> numbers_operators = new ArrayList<>();
 		numbers_operators = eqObj.trim().splitWithDelimiters("[-x÷\\+]|(\\^)|/|=", numbers_operators);
@@ -308,17 +308,17 @@ public class CalculatorDriver {
 			else if (numbers_operators.get(i).matches("^(-)?[0-9]+(.[0-9]+)?(E[0-9]+)?$"))numbers.add(numbers_operators.get(i).trim());
 		}
 		
-		System.out.println("numbers: " + numbers);
-		System.out.println("operators: " + operators);
+		//System.out.println("numbers: " + numbers);
+		//System.out.println("operators: " + operators);
 		
 	
 		output = "";//reset output
-		System.out.println("searchOperation.return:"+searchOperation(numbers, operators));
-		System.out.println("getResult.return:"+ Double.parseDouble(result));
-		System.out.println("results: " + numbers);
-		System.out.println("operators left: " + operators);
+		searchOperation(numbers, operators);
+		//System.out.println("getResult.return:"+ Double.parseDouble(result));
+		//System.out.println("results: " + numbers);
+		//System.out.println("operators left: " + operators);
 		
-        System.out.println(isFinalOp);
+        //System.out.println(isFinalOp);
 		return Double.parseDouble(result);
 		
 	}
@@ -326,16 +326,11 @@ public class CalculatorDriver {
  	private static String removeParenthesis(String entry) {
 
 		Equation eqObj = new Equation(entry);
- 		System.out.println("removeParenthesisOf: "+eqObj);
+ 		//System.out.println("removeParenthesisOf: "+eqObj);
  		
  		ArrayList<String> num_op = new ArrayList<>();
 		num_op = eqObj.splitWithDelimiters("[\\(\\)=]", num_op);
 
-	 		System.out.print("num_op_split: [");
-	 		for (String element : num_op) {
-	 			System.out.print(element+",");
-	 			}
-	 		System.out.println("]");
 	 		
 	 		int open_p = 0;
 	 		int close_p = 0;
@@ -347,8 +342,8 @@ public class CalculatorDriver {
 		 	}
 		 	
 		 if (open_p != close_p) {
-			 System.out.println(entry); 
-				System.out.println("error:syntax"); 
+			 //System.out.println(entry); 
+				//System.out.println("error:syntax"); 
 				outputDisplay.setValue("error:syntax");
 				input = "0";
 				output = "";
@@ -359,9 +354,9 @@ public class CalculatorDriver {
 		 			String str = num_opAL.get(i);
 		 			String strNext = num_opAL.get(i+1);
 		 		if (str.matches("[0-9\\)]") || str.matches(validNum) || str.substring(str.trim().length()).matches("[0-9\\)]")) {
-		 			System.out.println("checknext");
+		 			//System.out.println("checknext");
 		 			if (strNext.equals("(") || strNext.substring(0,1).matches("[0-9]")) {
-		 				System.out.println("add x");
+		 				//System.out.println("add x");
 		 				num_opAL.add(i+1, " x ");
 		 			}
 		 		}
@@ -377,13 +372,13 @@ public class CalculatorDriver {
 	 		num_opAL.remove(indexOfLast+1);
  		
 	 		String resultNoParenthesis = "";
-	 		System.out.print("num_opAL: [");
+	 		//System.out.print("num_opAL: [");
 		 		for (String element : num_opAL) {
-			 			System.out.print(element+",");
+			 			//System.out.print(element+",");
 			 			resultNoParenthesis += element;
 		 		}
-		 	System.out.println("]");
-		 	System.out.println(resultNoParenthesis);
+		 	//System.out.println("]");
+		 	//System.out.println(resultNoParenthesis);
  		
  		return resultNoParenthesis;	
  	}

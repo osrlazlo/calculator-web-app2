@@ -23,7 +23,7 @@ public class Equation {
     }
 
     public ArrayList<String> splitWithDelimiters(String regex, ArrayList<String> list) {
-        System.out.println("split: "+regex);
+        //System.out.println("split: "+regex);
 
         if (string == null || string.length() < 2) {
             list.add(string);
@@ -45,7 +45,7 @@ public class Equation {
             String c = ""+str.charAt(i);
                 if (c.equals("")) continue;
                 if (c.matches(regex)) {
-                    System.out.println("match: "+str.charAt(i) + i);
+                    //System.out.println("match: "+str.charAt(i) + i);
                     if (c.equals("-")) {
                     	if ((""+str.charAt(i+1)).matches("[0-9]")) continue; 
                     }
@@ -54,7 +54,7 @@ public class Equation {
                     list.add(""+str.charAt(i));
                     
                     str = str.substring(i+1).trim();
-                    System.out.println("sub: "+str);
+                    //System.out.println("sub: "+str);
                     break;
                 }
             }
